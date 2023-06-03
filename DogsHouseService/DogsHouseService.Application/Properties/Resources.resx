@@ -120,4 +120,7 @@
   <data name="EntityNotFound" xml:space="preserve">
     <value>Entity '{0}' (by id {1}) not found.</value>
   </data>
+  <data name="InvalidSortingAttribute" xml:space="preserve">
+    <value>Invalid attribute for sorting.</value>
+  </data>
 </root>

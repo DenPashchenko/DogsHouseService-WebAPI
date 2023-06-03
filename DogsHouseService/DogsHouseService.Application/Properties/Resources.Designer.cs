@@ -68,5 +68,14 @@ namespace DogsHouseService.Application.Properties {
                 return ResourceManager.GetString("EntityNotFound", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid attribute for sorting..
+        /// </summary>
+        internal static string InvalidSortingAttribute {
+            get {
+                return ResourceManager.GetString("InvalidSortingAttribute", resourceCulture);
+            }
+        }
     }
 }

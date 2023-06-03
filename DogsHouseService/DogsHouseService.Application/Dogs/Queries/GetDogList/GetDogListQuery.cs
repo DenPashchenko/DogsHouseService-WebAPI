@@ -1,4 +1,5 @@
-﻿using DogsHouseService.Application.Properties;
+﻿using DogsHouseService.Application.Common.Helpers;
+using DogsHouseService.Application.Properties;
 using DogsHouseService.Domain;
 using MediatR;
 using System;
@@ -29,7 +30,7 @@ namespace DogsHouseService.Application.Dogs.Queries.GetDogList
             }
 			if (!string.IsNullOrEmpty(sortingProperty))
 			{
-				var normalizedSortingProperty = NormalizeSortingProperty(sortingProperty);
+				var normalizedSortingProperty = NameConverter.ConvertToPascalCase(sortingProperty);
 
 				foreach (var property in propertyInfos)
 				{
@@ -42,27 +43,11 @@ namespace DogsHouseService.Application.Dogs.Queries.GetDogList
 				}
 				if (!isValid)
 				{
-					throw new ValidationException("Invalid attribute.");
+					throw new ValidationException(Resources.InvalidSortingAttribute);
 				}
 			}
 
 			SortingQuery = $"{_sortingProperty} {_orderBy}";
         }
-
-		private string NormalizeSortingProperty(string sortingProperty)
-		{
-			string[] words = sortingProperty.Split('_');
-			StringBuilder normalizedProperty = new StringBuilder();
-
-			foreach (string word in words)
-			{
-				if (word.Length > 0)
-				{
-					normalizedProperty.Append(char.ToUpper(word[0]) + word.Substring(1));
-				}
-			}
-
-			return normalizedProperty.ToString();
-		}
 	}
 }
