@@ -2,18 +2,22 @@
 using DogsHouseService.Application.Dogs.Commands;
 using DogsHouseService.Application.Dogs.Queries.GetDogById;
 using DogsHouseService.Application.Dogs.Queries.GetDogList;
-using DogsHouseService.WebApi.Controllers.Abstractions;
 using DogsHouseService.WebApi.Models;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DogsHouseService.WebApi.Controllers
 {
 	[Route("[controller]")]
+	[ApiController]
 	[Produces("application/json")]
-	public class DogsController : BaseController
+	public class DogsController : ControllerBase
 	{
 		private readonly IMapper _mapper;
+		private IMediator? _mediator;
+
+		protected IMediator? Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
 		public DogsController(IMapper mapper) => _mapper = mapper;
 

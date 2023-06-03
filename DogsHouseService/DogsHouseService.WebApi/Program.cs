@@ -1,9 +1,7 @@
 using DogsHouseService.Application.Common.Mappings;
 using DogsHouseService.Application.Interfaces;
-using DogsHouseService.Domain;
 using DogsHouseService.Persistence;
 using DogsHouseService.WebApi.Middleware;
-using Microsoft.Extensions.Hosting;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,7 +34,6 @@ app.UseCustomExceptionHandler();
 app.UseHttpsRedirection();
 
 //app.UseAuthorization();
-
 app.MapControllers();
 
 using (var scope = app.Services.CreateScope())

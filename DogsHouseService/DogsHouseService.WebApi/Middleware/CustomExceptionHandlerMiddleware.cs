@@ -45,6 +45,12 @@ namespace DogsHouseService.WebApi.Middleware
 					exceptionMessage = notFoundException.Message;
 					problemTitle = Resources.NotFound;
 					break;
+
+				//case JsonException jsonException:
+				//	code = HttpStatusCode.BadRequest;
+				//	exceptionMessage = jsonException.Message;
+				//	problemTitle = Resources.ValidationErrors;
+				//	break;
 			}
 			context.Response.ContentType = "application/json";
 			context.Response.StatusCode = (int)code;
