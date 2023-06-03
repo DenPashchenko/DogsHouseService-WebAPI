@@ -17,19 +17,21 @@ namespace DogsHouseService.WebApi.Controllers
 		private readonly IMapper _mapper;
 		private IMediator? _mediator;
 
-		protected IMediator? Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+		private IMediator? Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
 		public DogsController(IMapper mapper) => _mapper = mapper;
-
+		
 		/// <summary>
-		/// Gets the list of dogs
+		/// Gets the list of dogs. Supports sorting and pagination
 		/// </summary>
 		/// <returns>Returns DogListVm</returns>
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<DogListVm>> GetAllAsync()
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		public async Task<ActionResult<DogListVm>> GetAllAsync([FromQuery(Name = "attribute")] string? sortingProperty,
+															   [FromQuery(Name = "order")] string? orderBy)
 		{
-			var query = new GetDogListQuery();
+			var query = new GetDogListQuery(sortingProperty, orderBy);
 			var viewModel = await Mediator.Send(query);
 
 			return Ok(viewModel);

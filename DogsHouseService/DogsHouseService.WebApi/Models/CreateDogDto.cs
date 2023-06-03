@@ -2,6 +2,7 @@
 using DogsHouseService.Application.Common.Mappings;
 using DogsHouseService.Application.Dogs.Commands;
 using DogsHouseService.WebApi.Models.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
