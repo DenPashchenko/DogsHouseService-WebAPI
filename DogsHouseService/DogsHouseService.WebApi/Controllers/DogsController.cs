@@ -6,6 +6,7 @@ using DogsHouseService.WebApi.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace DogsHouseService.WebApi.Controllers
 {
@@ -29,12 +30,16 @@ namespace DogsHouseService.WebApi.Controllers
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public async Task<ActionResult<DogListVm>> GetAllAsync([FromQuery(Name = "attribute")] string? sortingProperty,
-															   [FromQuery(Name = "order")] string? orderBy)
+															   [FromQuery(Name = "order")] string? orderBy,
+															   [FromQuery(Name = "pageNumber")] int? pageNumber,
+															   [FromQuery(Name = "pageSize")] int? pageSize)
 		{
-			var query = new GetDogListQuery(sortingProperty, orderBy);
+			var query = new GetDogListQuery(sortingProperty, orderBy, pageNumber, pageSize);
 			var viewModel = await Mediator.Send(query);
 
-			return Ok(viewModel);
+			Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(viewModel.Metadata));
+
+			return Ok(viewModel.Dogs);
 		}
 
 		/// <summary>

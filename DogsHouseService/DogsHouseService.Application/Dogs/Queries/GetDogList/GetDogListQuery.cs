@@ -14,15 +14,31 @@ namespace DogsHouseService.Application.Dogs.Queries.GetDogList
 {
 	public class GetDogListQuery : IRequest<DogListVm>
 	{
-        public string SortingQuery { get; private set; }
+		const int MaxPageSize = 50;
+		public string SortingQuery { get; private set; }
+		public int PageNumber { get; private set; } = 1;
+		public int PageSize
+		{
+			get
+			{
+				return _pageSize;
+			}
+			set
+			{
+				_pageSize = (value > MaxPageSize) ? MaxPageSize : value;
+			}
+		}
 
 		private string _sortingProperty = "Id";
 		private string _orderBy = "ascending";
+		private int _pageSize = 10;
 
-		public GetDogListQuery(string sortingProperty, string orderBy)
+		public GetDogListQuery(string? sortingProperty, string? orderBy, int? pageNumber, int? pageSize)
         {
 			bool isValid = false;
 			var propertyInfos = typeof(DogListDto).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+			PageNumber = pageNumber ?? 1;
+			PageSize = pageSize ?? _pageSize;
 
 			if (!string.IsNullOrEmpty(orderBy) && orderBy.ToLower() == "desc")
             {
