@@ -79,6 +79,15 @@ namespace DogsHouseService.WebApi.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Too Many Requests.
+        /// </summary>
+        internal static string TooManyRequests {
+            get {
+                return ResourceManager.GetString("TooManyRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to One or more validation errors occurred.
         /// </summary>
         internal static string ValidationErrors {

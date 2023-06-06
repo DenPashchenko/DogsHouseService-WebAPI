@@ -22,6 +22,7 @@ namespace DogsHouseService.Application.Common.Helpers
 			PageSize = pageSize;
 			CurrentPage = pageNumber;
 			TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+
 			AddRange(items);
 		}
 
@@ -29,7 +30,7 @@ namespace DogsHouseService.Application.Common.Helpers
 			CancellationToken cancellationToken = default)
 		{
 			var count = source.Count();
-			var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+			var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
 
 			return new PagedList<T>(items, count, pageNumber, pageSize);
 		}

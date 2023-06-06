@@ -77,5 +77,14 @@ namespace DogsHouseService.Application.Properties {
                 return ResourceManager.GetString("InvalidSortingAttribute", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Too many requests from your IP address..
+        /// </summary>
+        internal static string TooManyRequests {
+            get {
+                return ResourceManager.GetString("TooManyRequests", resourceCulture);
+            }
+        }
     }
 }

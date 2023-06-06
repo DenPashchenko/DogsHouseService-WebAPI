@@ -1,58 +1,48 @@
 ﻿using DogsHouseService.Application.Common.Helpers;
 using DogsHouseService.Application.Properties;
-using DogsHouseService.Domain;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DogsHouseService.Application.Dogs.Queries.GetDogList
 {
 	public class GetDogListQuery : IRequest<DogListVm>
 	{
-		const int MaxPageSize = 50;
-		public string SortingQuery { get; private set; }
-		public int PageNumber { get; private set; } = 1;
-		public int PageSize
+		private const string DefaultAttribute = "Id";
+
+		public string SortingQuery
 		{
-			get
-			{
-				return _pageSize;
-			}
-			set
-			{
-				_pageSize = (value > MaxPageSize) ? MaxPageSize : value;
-			}
+			get => _sortingQuery;
 		}
+		public int PageNumber { get; set; }
+		public int PageSize { get; set; }
+		public string Attribute { get; set; } = null!;
+		public string Order { get; set; } = null!;
 
-		private string _sortingProperty = "Id";
-		private string _orderBy = "ascending";
-		private int _pageSize = 10;
+		private string _sortingQuery => GetSortingQuery();
 
-		public GetDogListQuery(string? sortingProperty, string? orderBy, int? pageNumber, int? pageSize)
-        {
+		private string GetSortingQuery()
+		{
 			bool isValid = false;
 			var propertyInfos = typeof(DogListDto).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-			PageNumber = pageNumber ?? 1;
-			PageSize = pageSize ?? _pageSize;
 
-			if (!string.IsNullOrEmpty(orderBy) && orderBy.ToLower() == "desc")
-            {
-                _orderBy = "descending";
-            }
-			if (!string.IsNullOrEmpty(sortingProperty))
+			if (!string.IsNullOrEmpty(Order) && (Order.ToLower() == "desc" || Order.ToLower() == "descending"))
 			{
-				var normalizedSortingProperty = NameConverter.ConvertToPascalCase(sortingProperty);
+				Order = "descending";
+			}
+			else
+			{
+				Order = "ascending";
+			}
+			if (!string.IsNullOrEmpty(Attribute))
+			{
+				var normalizedSortingProperty = NameConverter.ConvertToPascalCase(Attribute);
 
 				foreach (var property in propertyInfos)
 				{
 					if (property.Name == normalizedSortingProperty)
 					{
-						_sortingProperty = property.Name;
+						Attribute = property.Name;
 						isValid = true;
 						break;
 					}
@@ -62,8 +52,12 @@ namespace DogsHouseService.Application.Dogs.Queries.GetDogList
 					throw new ValidationException(Resources.InvalidSortingAttribute);
 				}
 			}
+			else
+			{
+				Attribute = DefaultAttribute;
+			}
 
-			SortingQuery = $"{_sortingProperty} {_orderBy}";
-        }
+			return $"{Attribute} {Order}";
+		}
 	}
 }

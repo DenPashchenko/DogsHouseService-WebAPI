@@ -2,17 +2,12 @@
 using DogsHouseService.Domain;
 using DogsHouseService.Persistence.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DogsHouseService.Persistence
 {
 	public class AppDbContext : DbContext, IAppDbContext
 	{
-		public DbSet<Dog> Dogs { get; set; }
+		public DbSet<Dog> Dogs { get; set; } = null!;
 
 		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

@@ -123,4 +123,7 @@
   <data name="InvalidSortingAttribute" xml:space="preserve">
     <value>Invalid attribute for sorting.</value>
   </data>
+  <data name="TooManyRequests" xml:space="preserve">
+    <value>Too many requests from your IP address.</value>
+  </data>
 </root>

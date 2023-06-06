@@ -2,39 +2,38 @@
 using DogsHouseService.Application.Dogs.Commands;
 using DogsHouseService.Application.Dogs.Queries.GetDogById;
 using DogsHouseService.Application.Dogs.Queries.GetDogList;
+using DogsHouseService.WebApi.Controllers.Abstractoins;
 using DogsHouseService.WebApi.Models;
-using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace DogsHouseService.WebApi.Controllers
 {
-	[Route("[controller]")]
-	[ApiController]
-	[Produces("application/json")]
-	public class DogsController : ControllerBase
+	public class DogsController : BaseController
 	{
 		private readonly IMapper _mapper;
-		private IMediator? _mediator;
-
-		private IMediator? Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
 		public DogsController(IMapper mapper) => _mapper = mapper;
-		
+
 		/// <summary>
 		/// Gets the list of dogs. Supports sorting and pagination
 		/// </summary>
-		/// <returns>Returns DogListVm</returns>
+		/// <remarks>
+		/// Sample requests:
+		///  - GET /dogs
+		///  - GET /dogs?attribute=name&amp;order=desc&amp;pageNumber=2&amp;pageSize=3
+		/// </remarks>
+		/// <returns>
+		/// Returns DogListVm
+		/// Returns metadata for a pagination in the response's header
+		/// </returns>
+		/// <response code="429">Too Many Requests</response>
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		public async Task<ActionResult<DogListVm>> GetAllAsync([FromQuery(Name = "attribute")] string? sortingProperty,
-															   [FromQuery(Name = "order")] string? orderBy,
-															   [FromQuery(Name = "pageNumber")] int? pageNumber,
-															   [FromQuery(Name = "pageSize")] int? pageSize)
+		public async Task<ActionResult<IList<DogListDto>>> GetAllAsync([FromQuery] DogListQueryParameters dogListQueryParameters)
 		{
-			var query = new GetDogListQuery(sortingProperty, orderBy, pageNumber, pageSize);
+			var query = _mapper.Map<GetDogListQuery>(dogListQueryParameters);
 			var viewModel = await Mediator.Send(query);
 
 			Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(viewModel.Metadata));
@@ -45,8 +44,12 @@ namespace DogsHouseService.WebApi.Controllers
 		/// <summary>
 		/// Gets a dog by id
 		/// </summary>
+		/// <remarks>
+		/// Sample request: GET /dogs/3
+		/// </remarks>
 		/// <param name="id">Dog id (int)</param>
 		/// <returns>Returns DogVm</returns>
+		/// <response code="429">Too Many Requests</response>
 		[HttpGet("{id}")]
 		[ActionName("GetByIdAsync")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
@@ -64,8 +67,19 @@ namespace DogsHouseService.WebApi.Controllers
 		/// <summary>
 		/// Creates a new dog
 		/// </summary>
+		/// <remarks>
+		/// Sample request:
+		/// POST /dogs
+		/// {
+		///		name: "dog's name",
+		///		color: "dog's color",
+		///		tail_length: dog's tail length,
+		///		weight: dog's weight
+		/// }
+		/// </remarks>
 		/// <param name="createDogDto">CreateDogDto object</param>
 		/// <returns>Returns id (int)</returns>
+		/// <response code="429">Too Many Requests</response>
 		[HttpPost]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]

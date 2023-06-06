@@ -1,7 +1,8 @@
 using DogsHouseService.Application.Common.Mappings;
 using DogsHouseService.Application.Interfaces;
 using DogsHouseService.Persistence;
-using DogsHouseService.WebApi.Middleware;
+using DogsHouseService.WebApi.Middleware.Extensions;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +23,10 @@ builder.Services.AddSwaggerGen(config =>
 	var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 	var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 	config.IncludeXmlComments(xmlPath);
+	config.DescribeAllParametersInCamelCase();
+	config.SwaggerDoc("v1", new OpenApiInfo { Title = "DogsHouseService API", Version = "v1" });
 });
+builder.Services.AddDistributedMemoryCache();
 
 var app = builder.Build();
 
@@ -33,7 +37,8 @@ app.UseCustomExceptionHandler();
 
 app.UseHttpsRedirection();
 
-//app.UseAuthorization();
+app.UseRateLimiting();
+
 app.MapControllers();
 
 using (var scope = app.Services.CreateScope())

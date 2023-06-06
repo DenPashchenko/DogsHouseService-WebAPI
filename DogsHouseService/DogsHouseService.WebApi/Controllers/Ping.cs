@@ -1,22 +1,21 @@
-﻿using DogsHouseService.Application.Dogs.Queries.GetDogList;
-using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using DogsHouseService.WebApi.Controllers.Abstractoins;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DogsHouseService.WebApi.Controllers
 {
-	[Route("[controller]")]
-	[ApiController]
-	[Produces("application/json")]
-	public class Ping : ControllerBase
+	public class Ping : BaseController
 	{
 		/// <summary>
 		/// Gets a ping
 		/// </summary>
-		/// <returns>Returns the string with app name and version</returns>
+		/// <remarks>
+		/// Sample request: GET /ping
+		/// </remarks>
+		/// <returns>Returns a string with this app's name and version</returns>
+		/// <response code="429">Too Many Requests</response>
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public ActionResult<string> PingAction()
+		public ActionResult<string> GetPing()
 		{			
 			return Ok("Dogs house service. Version 1.0.1");
 		}

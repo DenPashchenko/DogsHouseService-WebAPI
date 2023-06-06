@@ -3,12 +3,7 @@ using AutoMapper.QueryableExtensions;
 using DogsHouseService.Application.Common.Helpers;
 using DogsHouseService.Application.Interfaces;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq.Dynamic.Core;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DogsHouseService.Application.Dogs.Queries.GetDogList
 {
@@ -29,8 +24,7 @@ namespace DogsHouseService.Application.Dogs.Queries.GetDogList
 				.ToPagedListAsync(_appDbContext.Dogs
 					.ProjectTo<DogListDto>(_mapper.ConfigurationProvider)
 					.OrderBy(request.SortingQuery),
-						request.PageNumber,
-						request.PageSize);
+						request.PageNumber, request.PageSize, cancellationToken);
 
 			var metadata = new Dictionary<string, object>
 			{
