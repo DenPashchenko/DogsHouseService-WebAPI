@@ -16,24 +16,24 @@ namespace DogsHouseService.Tests.CommandsAndQueriesTests.Common
 			context.Dogs.AddRange(
 				new Dog
 				{
-					Name = "Name1",
-					Color = "Color1",
-					TailLength = 1,
-					Weight = 10
-				},
-				new Dog
-				{
-					Name = "Name2",
-					Color = "Color2",
-					TailLength = 2,
-					Weight = 20
-				},
-				new Dog
-				{
 					Name = "Name3",
-					Color = "Color3",
+					Color = "color3",
 					TailLength = 3,
 					Weight = 30
+				},
+				new Dog
+				{
+					Name = "Name4",
+					Color = "color4",
+					TailLength = 4,
+					Weight = 40
+				},
+				new Dog
+				{
+					Name = "Name5",
+					Color = "color5",
+					TailLength = 5,
+					Weight = 50
 				}
 			);
 			

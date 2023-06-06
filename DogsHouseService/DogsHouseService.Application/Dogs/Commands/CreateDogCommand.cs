@@ -16,5 +16,5 @@ namespace DogsHouseService.Application.Dogs.Commands
 		public int TailLength { get; set; }
 
 		public int Weight { get; set; }
-	}
+    }
 }

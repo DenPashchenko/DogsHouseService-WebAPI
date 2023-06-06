@@ -28,8 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CommandsAndQueriesTests\Dogs\CommandsTests\" />
-    <Folder Include="CommandsAndQueriesTests\Dogs\QueriesTests\" />
     <Folder Include="CommandsAndQueriesTests\Ping\" />
     <Folder Include="HelpersTests\" />
     <Folder Include="MiddlewareTests\" />

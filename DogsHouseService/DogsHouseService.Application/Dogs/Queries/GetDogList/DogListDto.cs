@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
 using DogsHouseService.Application.Common.Mappings;
 using DogsHouseService.Domain;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace DogsHouseService.Application.Dogs.Queries.GetDogList
 {
@@ -27,6 +21,34 @@ namespace DogsHouseService.Application.Dogs.Queries.GetDogList
 		public void Mapping(Profile profile)
 		{
 			profile.CreateMap<Dog, DogListDto>();
+		}
+
+		public override bool Equals(object? obj)
+		{
+			if (obj == null || GetType() != obj.GetType())
+				return false;
+
+			DogListDto other = (DogListDto)obj;
+
+			return Id == other.Id &&
+				   Name == other.Name &&
+				   Color == other.Color &&
+				   TailLength == other.TailLength &&
+				   Weight == other.Weight;
+		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				int hashCode = 17;
+				hashCode = hashCode * 23 + Id.GetHashCode();
+				hashCode = hashCode * 23 + (Name != null ? Name.GetHashCode() : 0);
+				hashCode = hashCode * 23 + (Color != null ? Color.GetHashCode() : 0);
+				hashCode = hashCode * 23 + TailLength.GetHashCode();
+				hashCode = hashCode * 23 + Weight.GetHashCode();
+				return hashCode;
+			}
 		}
 	}
 }
