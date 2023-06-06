@@ -10,6 +10,8 @@ namespace DogsHouseService.Application.Common.Helpers
 	{
 		public static string ConvertToPascalCase(string snakeCase)
 		{
+			ArgumentNullException.ThrowIfNull(snakeCase);
+			
 			string[] words = snakeCase.Split('_');
 			StringBuilder pascalCase = new StringBuilder();
 

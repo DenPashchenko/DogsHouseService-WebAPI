@@ -3,7 +3,7 @@ using DogsHouseService.Application.Common.Mappings;
 using DogsHouseService.Application.Interfaces;
 using DogsHouseService.Persistence;
 
-namespace DogsHouseService.Tests.CommandsAndQueriesTests.Common
+namespace DogsHouseService.Tests.Common
 {
 	public abstract class TestFixtureBase : IDisposable
 	{

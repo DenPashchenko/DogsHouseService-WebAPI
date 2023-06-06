@@ -2,11 +2,11 @@
 using DogsHouseService.Application.Common.Exceptions;
 using DogsHouseService.Application.Dogs.Queries.GetDogById;
 using DogsHouseService.Persistence;
-using DogsHouseService.Tests.CommandsAndQueriesTests.Common;
+using DogsHouseService.Tests.Common;
 
 namespace DogsHouseService.Tests.CommandsAndQueriesTests.Dogs.QueriesTests
 {
-	[Collection("QueryCollection")]
+    [Collection("QueryCollection")]
 	public class GetDogByIdQueryHandlerTests
 	{
 		private AppDbContext _context;

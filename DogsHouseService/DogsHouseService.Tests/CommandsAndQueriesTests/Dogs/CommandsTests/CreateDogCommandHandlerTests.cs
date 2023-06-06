@@ -1,5 +1,5 @@
 ﻿using DogsHouseService.Application.Dogs.Commands;
-using DogsHouseService.Tests.CommandsAndQueriesTests.Common;
+using DogsHouseService.Tests.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace DogsHouseService.Tests.CommandsAndQueriesTests.Dogs.CommandsTests
@@ -22,7 +22,7 @@ namespace DogsHouseService.Tests.CommandsAndQueriesTests.Dogs.CommandsTests
 				},
 				CancellationToken.None);
 
-			Assert.NotNull(await _context.Dogs.SingleOrDefaultAsync(dog => 
+			Assert.NotNull(await _context.Dogs.SingleOrDefaultAsync(dog =>
 				dog.Id == 6 &&
 				dog.Name == "Name6" &&
 				dog.Color == "color6" &&

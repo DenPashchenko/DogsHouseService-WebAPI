@@ -2,7 +2,7 @@
 using DogsHouseService.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace DogsHouseService.Tests.CommandsAndQueriesTests.Common
+namespace DogsHouseService.Tests.Common
 {
 	public class DogsHouseServiceContextFactory
 	{
@@ -36,7 +36,7 @@ namespace DogsHouseService.Tests.CommandsAndQueriesTests.Common
 					Weight = 50
 				}
 			);
-			
+
 			context.SaveChanges();
 			return context;
 		}

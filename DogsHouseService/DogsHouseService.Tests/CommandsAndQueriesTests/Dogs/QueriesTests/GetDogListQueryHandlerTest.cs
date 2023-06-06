@@ -1,19 +1,14 @@
 ﻿using AutoMapper;
 using DogsHouseService.Application.Dogs.Queries.GetDogList;
 using DogsHouseService.Persistence;
-using DogsHouseService.Tests.CommandsAndQueriesTests.Common;
 using System.Linq.Dynamic.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using DogsHouseService.Tests.Common;
 
 namespace DogsHouseService.Tests.CommandsAndQueriesTests.Dogs.QueriesTests
 {
-	[Collection("QueryCollection")]
+    [Collection("QueryCollection")]
 	public class GetDogListQueryHandlerTest
 	{
 		private AppDbContext _context;
@@ -175,7 +170,7 @@ namespace DogsHouseService.Tests.CommandsAndQueriesTests.Dogs.QueriesTests
 			Assert.Equal($"{attribute} {expectedOrderValue}", dogListQuery.SortingQuery);
 			Assert.Equal(_context.Dogs.Count(), result.Dogs?.Count);
 			Assert.Equal(expectedDogs, result.Dogs?.ToList());
-			
+
 		}
 	}
 }

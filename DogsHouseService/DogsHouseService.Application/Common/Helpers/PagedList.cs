@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DogsHouseService.Application.Common.Helpers
 {
@@ -26,7 +21,7 @@ namespace DogsHouseService.Application.Common.Helpers
 			AddRange(items);
 		}
 
-		public static async Task <PagedList<T>> ToPagedListAsync(IQueryable<T> source, int pageNumber, int pageSize, 
+		public static async Task<PagedList<T>> ToPagedListAsync(IQueryable<T> source, int pageNumber, int pageSize,
 			CancellationToken cancellationToken = default)
 		{
 			var count = source.Count();
