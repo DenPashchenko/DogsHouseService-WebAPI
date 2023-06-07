@@ -12,10 +12,10 @@ namespace DogsHouseService.Tests.CommandsAndQueriesTests.Dogs.QueriesTests
 		private AppDbContext _context;
 		private IMapper _mapper;
 
-		public GetDogByIdQueryHandlerTests(QueryTestFixture fixture)
+		public GetDogByIdQueryHandlerTests(TestFixture fixture)
 		{
 			_context = fixture.context;
-			_mapper = fixture._mapper;
+			_mapper = fixture.mapper;
 		}
 
 		[Fact]

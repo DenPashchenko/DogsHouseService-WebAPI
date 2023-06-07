@@ -5,7 +5,7 @@ using DogsHouseService.Tests.Common;
 
 namespace DogsHouseService.Tests.HelpersTests
 {
-    public class PagedListTests : TestFixtureBase
+    public class PagedListTests : TestFixture
 	{
 		[Fact]
 		public void PagedList_Initialization_SetsPropertiesCorrectly()
@@ -29,8 +29,8 @@ namespace DogsHouseService.Tests.HelpersTests
 		[Fact]
 		public async Task ToPagedListAsync_SecondPageOutOfThree_ReturnsPagedListWithTwoDogs()
 		{
-			var items = _context.Dogs
-				.ProjectTo<DogListDto>(_mapper.ConfigurationProvider)
+			var items = context.Dogs
+				.ProjectTo<DogListDto>(mapper.ConfigurationProvider)
 				.Select(d => new DogListDto
 				{
 					Id = d.Id,
@@ -42,13 +42,13 @@ namespace DogsHouseService.Tests.HelpersTests
 			// Now we have 5 dogs (3 in DogsHouseServiceContextFactory + 2 initially seeded)
 			var pageNumber = 2;
 			var pageSize = 2;
-			var expectedResult = _context.Dogs
-				.ProjectTo<DogListDto>(_mapper.ConfigurationProvider)
+			var expectedResult = context.Dogs
+				.ProjectTo<DogListDto>(mapper.ConfigurationProvider)
 				.Where(d => d.Id == 3 || d.Id == 4);
 
 			var pagedList = await PagedList<DogListDto>.ToPagedListAsync(items, pageNumber, pageSize);
 
-			Assert.Equal(_context.Dogs.Count(), pagedList.TotalCount);
+			Assert.Equal(context.Dogs.Count(), pagedList.TotalCount);
 			Assert.Equal(pageSize, pagedList.PageSize);
 			Assert.Equal(pageNumber, pagedList.CurrentPage);
 			Assert.Equal(3, pagedList.TotalPages);
@@ -62,8 +62,8 @@ namespace DogsHouseService.Tests.HelpersTests
 		[Fact]
 		public async Task ToPagedListAsync_ThirdPageOutOfThree_ReturnsPagedListWithOneDog()
 		{
-			var items = _context.Dogs
-				.ProjectTo<DogListDto>(_mapper.ConfigurationProvider)
+			var items = context.Dogs
+				.ProjectTo<DogListDto>(mapper.ConfigurationProvider)
 				.Select(d => new DogListDto
 				{
 					Id = d.Id,
@@ -75,8 +75,8 @@ namespace DogsHouseService.Tests.HelpersTests
 			// Now we have 5 dogs (3 in DogsHouseServiceContextFactory + 2 initially seeded)
 			var pageNumber = 3;
 			var pageSize = 2;
-			var expectedResult = _context.Dogs
-				.ProjectTo<DogListDto>(_mapper.ConfigurationProvider)
+			var expectedResult = context.Dogs
+				.ProjectTo<DogListDto>(mapper.ConfigurationProvider)
 				.Where(d => d.Id == 5);
 
 			var pagedList = await PagedList<DogListDto>.ToPagedListAsync(items, pageNumber, pageSize);

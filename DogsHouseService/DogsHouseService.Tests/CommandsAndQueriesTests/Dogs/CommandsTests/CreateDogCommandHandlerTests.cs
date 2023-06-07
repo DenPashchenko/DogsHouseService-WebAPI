@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DogsHouseService.Tests.CommandsAndQueriesTests.Dogs.CommandsTests
 {
-	public class CreateDogCommandHandlerTests : TestFixtureBase
+	public class CreateDogCommandHandlerTests : TestFixture
 	{
 		[Fact]
 		public async Task CreateDogCommandHandler_ValidData_Success()
 		{
-			var handler = new CreateDogCommandHandler(_context, _mapper);
+			var handler = new CreateDogCommandHandler(context, mapper);
 			var newDogId = 6; // Now we have 5 dogs (3 in DogsHouseServiceContextFactory + 2 initially seeded)
 
 			var result = await handler.Handle(
@@ -22,7 +22,7 @@ namespace DogsHouseService.Tests.CommandsAndQueriesTests.Dogs.CommandsTests
 				},
 				CancellationToken.None);
 
-			Assert.NotNull(await _context.Dogs.SingleOrDefaultAsync(dog =>
+			Assert.NotNull(await context.Dogs.SingleOrDefaultAsync(dog =>
 				dog.Id == 6 &&
 				dog.Name == "Name6" &&
 				dog.Color == "color6" &&

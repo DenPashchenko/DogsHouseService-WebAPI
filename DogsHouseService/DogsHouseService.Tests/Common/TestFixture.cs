@@ -5,25 +5,28 @@ using DogsHouseService.Persistence;
 
 namespace DogsHouseService.Tests.Common
 {
-	public abstract class TestFixtureBase : IDisposable
+	public class TestFixture : IDisposable
 	{
-		public AppDbContext _context;
-		public IMapper _mapper;
+		public AppDbContext context;
+		public IMapper mapper;
 
-		public TestFixtureBase()
+		public TestFixture()
 		{
-			_context = DogsHouseServiceContextFactory.Create();
+			context = DogsHouseServiceContextFactory.Create();
 			var configurationProvider = new MapperConfiguration(cfg =>
 			{
 				cfg.AddProfile(new AssemblyMappingProfile(
 					typeof(IAppDbContext).Assembly));
 			});
-			_mapper = configurationProvider.CreateMapper();
+			mapper = configurationProvider.CreateMapper();
 		}
 
 		public void Dispose()
 		{
-			DogsHouseServiceContextFactory.Destroy(_context);
+			DogsHouseServiceContextFactory.Destroy(context);
 		}
 	}
+
+	[CollectionDefinition("QueryCollection")]
+	public class QueryCollection : ICollectionFixture<TestFixture> { }
 }

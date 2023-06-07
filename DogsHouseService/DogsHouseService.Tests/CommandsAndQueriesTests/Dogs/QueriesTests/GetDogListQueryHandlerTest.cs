@@ -8,16 +8,16 @@ using DogsHouseService.Tests.Common;
 
 namespace DogsHouseService.Tests.CommandsAndQueriesTests.Dogs.QueriesTests
 {
-    [Collection("QueryCollection")]
+	[Collection("QueryCollection")]
 	public class GetDogListQueryHandlerTest
 	{
 		private AppDbContext _context;
 		private IMapper _mapper;
 
-		public GetDogListQueryHandlerTest(QueryTestFixture fixture)
+		public GetDogListQueryHandlerTest(TestFixture fixture)
 		{
 			_context = fixture.context;
-			_mapper = fixture._mapper;
+			_mapper = fixture.mapper;
 		}
 
 		[Fact]
