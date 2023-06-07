@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using DogsHouseService.Application.Common.Mappings;
 using DogsHouseService.Application.Dogs.Queries.GetDogList;
+using DogsHouseService.WebApi.Models.Validation;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace DogsHouseService.WebApi.Models
 {
@@ -16,9 +18,11 @@ namespace DogsHouseService.WebApi.Models
 		public string? Order { get; set; }
 
 		[Range(1, int.MaxValue)]
+		[JsonConverter(typeof(IntegerValidator))]
 		public int PageNumber { get; set; } = DefaultPageNumber;
 
 		[Range(1, int.MaxValue)]
+		[JsonConverter(typeof(IntegerValidator))]
 		public int PageSize
 		{
 			get => _pageSize;

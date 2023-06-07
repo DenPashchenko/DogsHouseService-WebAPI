@@ -70,6 +70,15 @@ namespace DogsHouseService.WebApi.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value must be an integer number..
+        /// </summary>
+        internal static string IntegerNumberMessage {
+            get {
+                return ResourceManager.GetString("IntegerNumberMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not Found.
         /// </summary>
         internal static string NotFound {

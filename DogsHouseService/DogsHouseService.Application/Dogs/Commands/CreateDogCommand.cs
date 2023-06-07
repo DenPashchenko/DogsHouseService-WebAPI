@@ -1,9 +1,4 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DogsHouseService.Application.Dogs.Commands
 {
@@ -16,5 +11,5 @@ namespace DogsHouseService.Application.Dogs.Commands
 		public int TailLength { get; set; }
 
 		public int Weight { get; set; }
-    }
+	}
 }

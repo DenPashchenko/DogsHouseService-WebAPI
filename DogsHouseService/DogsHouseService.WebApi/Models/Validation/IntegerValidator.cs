@@ -1,9 +1,10 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json;
+using DogsHouseService.WebApi.Properties;
 
 namespace DogsHouseService.WebApi.Models.Validation
 {
-	public class IntegerChecker : JsonConverter<int>
+	public class IntegerValidator : JsonConverter<int>
 	{
 		public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
@@ -12,7 +13,7 @@ namespace DogsHouseService.WebApi.Models.Validation
 				return value;
 			}
 
-			throw new JsonException("The value must be an integer number.");
+			throw new JsonException(Resources.IntegerNumberMessage);
 		}
 
 		public override void Write(Utf8JsonWriter writer, int value, JsonSerializerOptions options)

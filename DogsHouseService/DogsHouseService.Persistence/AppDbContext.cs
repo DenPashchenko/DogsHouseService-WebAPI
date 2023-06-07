@@ -9,7 +9,10 @@ namespace DogsHouseService.Persistence
 	{
 		public DbSet<Dog> Dogs { get; set; } = null!;
 
-		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+		{
+			Database.EnsureCreated();
+		}
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{

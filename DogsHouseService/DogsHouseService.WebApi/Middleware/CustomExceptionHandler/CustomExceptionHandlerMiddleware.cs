@@ -1,15 +1,13 @@
 ﻿using DogsHouseService.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
 using System.Net;
-using System.Resources;
 using System.Text.Json;
 using DogsHouseService.WebApi.Properties;
 
 namespace DogsHouseService.WebApi.Middleware.CustomExceptionHandler
 {
-    public class CustomExceptionHandlerMiddleware
+	public class CustomExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
 

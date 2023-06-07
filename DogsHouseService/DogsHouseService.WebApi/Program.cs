@@ -41,18 +41,4 @@ app.UseRateLimiting();
 
 app.MapControllers();
 
-using (var scope = app.Services.CreateScope())
-{
-	var serviceProvider = scope.ServiceProvider;
-	try
-	{
-		var context = serviceProvider.GetRequiredService<AppDbContext>();
-		DbInitializer.Initialize(context);
-	}
-	catch (Exception exception)
-	{
-		//Log.Fatal(exception, "An error occurred while app initialization");
-	}
-}
-
 app.Run();

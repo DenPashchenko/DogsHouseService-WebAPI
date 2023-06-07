@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace DogsHouseService.Application.Common.Helpers
 {
@@ -11,7 +7,7 @@ namespace DogsHouseService.Application.Common.Helpers
 		public static string ConvertToPascalCase(string snakeCase)
 		{
 			ArgumentNullException.ThrowIfNull(snakeCase);
-			
+
 			string[] words = snakeCase.Split('_');
 			StringBuilder pascalCase = new StringBuilder();
 
