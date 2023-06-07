@@ -88,7 +88,7 @@ namespace DogsHouseService.WebApi.Controllers
 			var command = _mapper.Map<CreateDogCommand>(createDogDto);
 			var dogId = await Mediator.Send(command);
 
-			return CreatedAtAction(nameof(GetByIdAsync), new { id = dogId }, dogId);//?version={createdResource.Version}
+			return CreatedAtAction(nameof(GetByIdAsync), new { id = dogId }, dogId);
 		}
 	}
 }

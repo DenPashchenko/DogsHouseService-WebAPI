@@ -22,7 +22,7 @@ namespace DogsHouseService.WebApi.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace DogsHouseService.WebApi.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DogsHouseService.WebApi.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace DogsHouseService.WebApi.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace DogsHouseService.WebApi.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Bad Request.
         /// </summary>
-        internal static string BadRequest {
+        public static string BadRequest {
             get {
                 return ResourceManager.GetString("BadRequest", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace DogsHouseService.WebApi.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The value must be an integer number..
         /// </summary>
-        internal static string IntegerNumberMessage {
+        public static string IntegerNumberMessage {
             get {
                 return ResourceManager.GetString("IntegerNumberMessage", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace DogsHouseService.WebApi.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Not Found.
         /// </summary>
-        internal static string NotFound {
+        public static string NotFound {
             get {
                 return ResourceManager.GetString("NotFound", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace DogsHouseService.WebApi.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Too Many Requests.
         /// </summary>
-        internal static string TooManyRequests {
+        public static string TooManyRequests {
             get {
                 return ResourceManager.GetString("TooManyRequests", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace DogsHouseService.WebApi.Properties {
         /// <summary>
         ///   Looks up a localized string similar to One or more validation errors occurred.
         /// </summary>
-        internal static string ValidationErrors {
+        public static string ValidationErrors {
             get {
                 return ResourceManager.GetString("ValidationErrors", resourceCulture);
             }
