@@ -20,11 +20,15 @@ builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(config =>
 {
+	var version = Assembly.GetExecutingAssembly().GetName().Version;
 	var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 	var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 	config.IncludeXmlComments(xmlPath);
 	config.DescribeAllParametersInCamelCase();
-	config.SwaggerDoc("v1", new OpenApiInfo { Title = "DogsHouseService API", Version = "v1" });
+	config.SwaggerDoc($"v{version?.Major}", new OpenApiInfo 
+	{ 
+		Title = "DogsHouseService API", Version = $"v{version?.Major}.{version?.Minor}.{version?.Build}" 
+	});
 });
 builder.Services.AddDistributedMemoryCache();
 
