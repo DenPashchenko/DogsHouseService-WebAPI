@@ -8,7 +8,7 @@ It has such features:
   You can specify desired parameters for ordering in a query string(e.g., 'attribute="Name"', 'order="desc"' or 'order="descending"').
   Default values - "Id" and "ascending" respectively.
   Pagination is also supported. Specify desired parameters for it in a query string(e.g., 'pageNumber=2', 'pageSize'=3).
-  Default values - 1 and 10. There is a maximum value for the pageSize - 50.
+  Default values - 1 and 10 respectively. There is a maximum value for the pageSize - 50.
   Feel free to use sorting and pagination parameters together.
 * Action for querying a dog by its Id.
 * Action for adding a new dog to DB.
